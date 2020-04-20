@@ -28,9 +28,9 @@
   "products": [
     {
       "id": 1,
-      "title": "Tênis de Caminhada Leve Confortável",
-      "price": 179.9,
-      "image": "https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis1.jpg"
+      "title": "Crocs encardido verão",
+      "price": 189.9,
+      "image": "https://static.netshoes.com.br/produtos/clog-crocs-crocband/60/FDT-0520-060/FDT-0520-060_zoom1.jpg?"
     },
     {
       "id": 2,
