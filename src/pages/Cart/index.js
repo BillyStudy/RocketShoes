@@ -10,7 +10,14 @@ import {
     MdDelete,
 } from 'react-icons/md';
 
-function Cart({cart, removeFromCart}) {
+function Cart({cart, removeFromCart, updateAmount}) {
+
+    function increment(product){
+        updateAmount(product.id, product.amount + 1)
+    }
+    function decrement(product){
+        updateAmount(product.id, product.amount - 1)
+    }
 
     const deleteItem = (prodId) => {
         removeFromCart(prodId)
@@ -39,14 +46,14 @@ function Cart({cart, removeFromCart}) {
                             </td>
                             <td>
                                 <div>
-                                    <button type="button">
+                                    <button type="button" onClick={()=> decrement(prod)}>
                                         <MdRemoveCircleOutline
                                             size={16}
                                             color={'#7159c1'}
                                         />
                                     </button>
                                     <input type="number" readOnly value={prod.amount} />
-                                    <button type="button">
+                                    <button type="button" onClick={()=> increment(prod)}>
                                         <MdAddCircleOutline
                                             size={16}
                                             color={'#7159c1'}
