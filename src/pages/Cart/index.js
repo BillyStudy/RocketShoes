@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 import {Container, ProductTable, Total} from './styles';
 import {
@@ -7,7 +8,7 @@ import {
     MdDelete,
 } from 'react-icons/md';
 
-export default function Cart() {
+function Cart({cart}) {
     return (
         <Container>
             <ProductTable>
@@ -21,43 +22,42 @@ export default function Cart() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>
-                            <img
-                                src="https://static.netshoes.com.br/produtos/sandalia-crocs-classic/12/117-0092-012/117-0092-012_zoom2.jpg?ims=326x"
-                                alt="croquis"
-                            />
-                        </td>
-                        <td>
-                            <strong>Crocs estiloso</strong>
-                            <span>R$ 129,90</span>
-                        </td>
-                        <td>
-                            <div>
+                    {cart.map((prod) => (
+                        <tr key={prod.id}>
+                            <td>
+                                <img src={prod.image} alt={prod.title} />
+                            </td>
+                            <td>
+                                <strong>{prod.title}</strong>
+                                <span>{prod.priceFormatted}</span>
+                            </td>
+                            <td>
+                                <div>
+                                    <button type="button">
+                                        <MdRemoveCircleOutline
+                                            size={16}
+                                            color={'#7159c1'}
+                                        />
+                                    </button>
+                                    <input type="number" readOnly value={prod.amount} />
+                                    <button type="button">
+                                        <MdAddCircleOutline
+                                            size={16}
+                                            color={'#7159c1'}
+                                        />
+                                    </button>
+                                </div>
+                            </td>
+                            <td>
+                                <strong>R$ 258,80</strong>
+                            </td>
+                            <td>
                                 <button type="button">
-                                    <MdRemoveCircleOutline
-                                        size={16}
-                                        color={'#7159c1'}
-                                    />
+                                    <MdDelete size={20} color={'#7159c1'} />
                                 </button>
-                                <input type="number" readOnly value={2} />
-                                <button type="button">
-                                    <MdAddCircleOutline
-                                        size={16}
-                                        color={'#7159c1'}
-                                    />
-                                </button>
-                            </div>
-                        </td>
-                        <td>
-                            <strong>R$ 258,80</strong>
-                        </td>
-                        <td>
-                            <button type="button">
-                                <MdDelete size={20} color={'#7159c1'} />
-                            </button>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </ProductTable>
 
@@ -71,3 +71,9 @@ export default function Cart() {
         </Container>
     );
 }
+
+const mapStateToProps = (state) => ({
+    cart: state.cart,
+});
+
+export default connect(mapStateToProps)(Cart);
