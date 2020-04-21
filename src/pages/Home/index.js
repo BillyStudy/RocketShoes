@@ -20,10 +20,10 @@ function Home(props) {
     }
     useEffect(() => getProducts(), []);
 
-    const handleAddToCart = (product) => {
-        const {addToCart} = props;
+    const handleAddToCart = (id) => {
+        const {addToCartRequest} = props;
 
-        addToCart(product);
+        addToCartRequest(id);
     };
 
     return (
@@ -35,7 +35,7 @@ function Home(props) {
                     <span>{prod.priceFormatted}</span>
                     <button
                         type="button"
-                        onClick={() => handleAddToCart(prod)}>
+                        onClick={() => handleAddToCart(prod.id)}>
                         <div>
                             <MdAddShoppingCart color="#fff" size={16} />{amount[prod.id] || 0}
                         </div>
