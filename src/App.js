@@ -9,8 +9,8 @@ import Routes from './routes';
 function App() {
     return (
         <Provider store={store}>
+            <GlobalStyle />
             <BrowserRouter>
-                <GlobalStyle />
                 <Header />
                 <Routes />
             </BrowserRouter>
