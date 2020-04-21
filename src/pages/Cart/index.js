@@ -1,5 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as CartAction from '../../store/modules/cart/actions';
 
 import {Container, ProductTable, Total} from './styles';
 import {
@@ -8,13 +10,10 @@ import {
     MdDelete,
 } from 'react-icons/md';
 
-function Cart({cart, dispatch}) {
+function Cart({cart, removeFromCart}) {
 
     const deleteItem = (prodId) => {
-        dispatch({
-            type: 'REMOVE_FROM_CART',
-            id: prodId
-        })
+        removeFromCart(prodId)
     }
     return (
         <Container>
@@ -83,4 +82,7 @@ const mapStateToProps = (state) => ({
     cart: state.cart,
 });
 
-export default connect(mapStateToProps)(Cart);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(CartAction, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
